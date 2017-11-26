@@ -9,7 +9,8 @@ import javax.ws.rs.core.MediaType;
 import java.util.ArrayList;
 import java.util.Collection;
 
-@Path("users")
+//TODO: Mapping not successful
+@Path("")/*users*/
 public class UserCollectionController extends BaseController {
 
     @GET
