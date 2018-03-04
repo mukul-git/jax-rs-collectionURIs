@@ -3,7 +3,7 @@ package org.vyomkesh.jaxRs.collectionURIs.rest.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ModelDependencyDao {
+public class StageDependencyDao {
 
 
     public List<ModelDependency> getUpstreamDepsFor(long modelStepId) {

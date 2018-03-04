@@ -1,44 +1,51 @@
 package org.vyomkesh.jaxRs.collectionURIs.rest.model;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionStage;
 
-public class ModelGroup implements Executable {
+public class StageGroup extends AbstractExecutableStage {
     private long id;
     private String name;
-    private List<Model> models;
+    private List<Stage> stages;
 
-    @Override
+    /*@Override
     public CompletableFuture<Map<Long, ModelData>> execute(Map<Long, ModelData> inputData) {
         CompletableFuture<Map<Long, ModelData>> future = new CompletableFuture<>();
-        Iterator<Model> itr = models.iterator();
+        Iterator<Stage> itr = stages.iterator();
         while (itr.hasNext()) {
             // itr.next().execute(null).thenCompose(itr.next().execute(null));
         }
-        // this.models.forEach(model -> model.execute(null).thenCompose());
+        // this.stages.forEach(model -> model.execute(null).thenCompose());
 
         return future;
-    }
+    }*/
 
     @Override
-    public ModelStepsDependencyGraph getDependencyGraph() {
+    public StageStepsDependencyGraph getDependencyGraph() {
         return null;
     }
 
     @Override
-    public List<Executable> getUpstream() {
+    public List<Executable> getUpstreamStages() {
         return null;
     }
 
     @Override
-    public List<Executable> getDownstream() {
+    public List<Executable> getDownstreamStages() {
         return null;
     }
 
     @Override
+    public CompletionStage<Map<Long, List<ModelData>>> trigger(Void v) {
+        //TODO:
+        return this;
+    }
+
+
+
+    /*@Override
     public Iterator<Executable> iterator() {
         return null;
-    }
+    }*/
 }

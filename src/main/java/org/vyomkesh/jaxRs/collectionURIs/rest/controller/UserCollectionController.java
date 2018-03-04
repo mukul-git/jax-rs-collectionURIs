@@ -16,6 +16,7 @@ public class UserCollectionController extends BaseController {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Collection<User> getUsers() {
+        //Stream.
         return new ArrayList<>();
     }
 

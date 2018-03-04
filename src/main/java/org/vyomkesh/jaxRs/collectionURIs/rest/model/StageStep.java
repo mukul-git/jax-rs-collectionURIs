@@ -1,16 +1,15 @@
 package org.vyomkesh.jaxRs.collectionURIs.rest.model;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionStage;
 
-public class ModelStep implements Executable {
+public class StageStep extends AbstractExecutableStage {
     private long modelId;
     private long id;
     private String name;
 
-    public ModelStep(long modelId, long id, String name) {
+    public StageStep(long modelId, long id, String name) {
         this.modelId = modelId;
         this.id = id;
         this.name = name;
@@ -28,28 +27,29 @@ public class ModelStep implements Executable {
         return name;
     }
 
-    @Override
+    /*@Override
     public CompletableFuture<Map<Long, ModelData>> execute(Map<Long, ModelData> inputData) {
         return null;
-    }
+    }*/
 
     @Override
-    public ModelStepsDependencyGraph getDependencyGraph() {
+    public StageStepsDependencyGraph getDependencyGraph() {
         return null;
     }
 
     @Override
-    public List<Executable> getUpstream() {
+    public List<Executable> getUpstreamStages() {
         return null;
     }
 
     @Override
-    public List<Executable> getDownstream() {
+    public List<Executable> getDownstreamStages() {
         return null;
     }
 
+
     @Override
-    public Iterator<Executable> iterator() {
-        return null;
+    public CompletionStage<Map<Long, List<ModelData>>> trigger(Void v) {
+        return this;
     }
 }
