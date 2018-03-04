@@ -44,7 +44,7 @@ public class Stage extends AbstractExecutableStage {
     }
 
     @Override
-    public CompletionStage<Map<Long, List<ModelData>>> trigger(Void v) {
+    public CompletionStage<Map<Long, List<StageData>>> trigger(Void v) {
 
         return this;
     }

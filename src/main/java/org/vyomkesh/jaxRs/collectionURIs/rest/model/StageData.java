@@ -2,7 +2,7 @@ package org.vyomkesh.jaxRs.collectionURIs.rest.model;
 
 import java.math.BigDecimal;
 
-public class ModelData {
+public class StageData {
     long stepRunId;
     String type;//Actual, Forecast
     BigDecimal value;

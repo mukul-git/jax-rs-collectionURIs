@@ -6,11 +6,11 @@ import java.util.List;
 public class StageDependencyDao {
 
 
-    public List<ModelDependency> getUpstreamDepsFor(long modelStepId) {
+    public List<StageDependency> getUpstreamDepsFor(long stageStepId) {
         return new ArrayList<>();
     }
 
-    public List<ModelDependency> getDownstreamDepsFor(long modelStepId) {
+    public List<StageDependency> getDownstreamDepsFor(long stageStepId) {
         return new ArrayList<>();
     }
 }

@@ -10,13 +10,13 @@ public class StageGroup extends AbstractExecutableStage {
     private List<Stage> stages;
 
     /*@Override
-    public CompletableFuture<Map<Long, ModelData>> execute(Map<Long, ModelData> inputData) {
-        CompletableFuture<Map<Long, ModelData>> future = new CompletableFuture<>();
+    public CompletableFuture<Map<Long, StageData>> execute(Map<Long, StageData> inputData) {
+        CompletableFuture<Map<Long, StageData>> future = new CompletableFuture<>();
         Iterator<Stage> itr = stages.iterator();
         while (itr.hasNext()) {
             // itr.next().execute(null).thenCompose(itr.next().execute(null));
         }
-        // this.stages.forEach(model -> model.execute(null).thenCompose());
+        // this.stages.forEach(stage -> stage.execute(null).thenCompose());
 
         return future;
     }*/
@@ -37,7 +37,7 @@ public class StageGroup extends AbstractExecutableStage {
     }
 
     @Override
-    public CompletionStage<Map<Long, List<ModelData>>> trigger(Void v) {
+    public CompletionStage<Map<Long, List<StageData>>> trigger(Void v) {
         //TODO:
         return this;
     }

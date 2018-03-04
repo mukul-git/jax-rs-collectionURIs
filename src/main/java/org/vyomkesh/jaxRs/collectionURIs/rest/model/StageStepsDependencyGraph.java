@@ -7,9 +7,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Spliterator;
 
-public class StageStepsDependencyGraph implements Iterable<Network<Executable, ModelDependency>> /*//TODO: change to IterableNetwork extends Network implements Iterable*/ {
+public class StageStepsDependencyGraph implements Iterable<Network<Executable, StageDependency>> /*//TODO: change to IterableNetwork extends Network implements Iterable*/ {
     private List<Stage> memberStages;
-    private Network<Executable, ModelDependency> dependencyGraph;
+    private Network<Executable, StageDependency> dependencyGraph;
     private StageDependencyDao stageDependencyDao;
 
     public StageStepsDependencyGraph(List<Stage> stages) {
@@ -22,18 +22,18 @@ public class StageStepsDependencyGraph implements Iterable<Network<Executable, M
         dependencyGraph = null; //TODO: use graph factory
     }
 
-    private Network<Executable, ModelDependency> computeDependencyGraph() {
-        //long modelStepId = 1L;
+    private Network<Executable, StageDependency> computeDependencyGraph() {
+        //long stageStepId = 1L;
         //TODO: Check if parallel changes are threadsafe
         memberStages.parallelStream().forEach(stage -> {
             dependencyGraph.nodes().add(stage);
-            stage.getStageSteps().parallelStream().forEach(modelStep -> {
-                        dependencyGraph.nodes().add(modelStep);
-                dependencyGraph.edges().add(new ModelDependency(stage.getId(), modelStep.getId(), Collections.EMPTY_MAP));
-                List<ModelDependency> upstreamModelDependencies = stageDependencyDao.getUpstreamDepsFor(modelStep.getId());
-                        upstreamModelDependencies.parallelStream().forEach(dependencyGraph.edges()::add);
-                List<ModelDependency> downstreamModelDependencies = stageDependencyDao.getDownstreamDepsFor(modelStep.getId());
-                        downstreamModelDependencies.parallelStream().forEach(dependencyGraph.edges()::add);
+            stage.getStageSteps().parallelStream().forEach(stageStep -> {
+                dependencyGraph.nodes().add(stageStep);
+                dependencyGraph.edges().add(new StageDependency(stage.getId(), stageStep.getId(), Collections.EMPTY_MAP));
+                List<StageDependency> upstreamStageDependencies = stageDependencyDao.getUpstreamDepsFor(stageStep.getId());
+                upstreamStageDependencies.parallelStream().forEach(dependencyGraph.edges()::add);
+                List<StageDependency> downstreamStageDependencies = stageDependencyDao.getDownstreamDepsFor(stageStep.getId());
+                downstreamStageDependencies.parallelStream().forEach(dependencyGraph.edges()::add);
                     });
                 }
         );
@@ -43,12 +43,12 @@ public class StageStepsDependencyGraph implements Iterable<Network<Executable, M
     }
 
     @Override
-    public Iterator<Network<Executable, ModelDependency>> iterator() {
+    public Iterator<Network<Executable, StageDependency>> iterator() {
         return null;
     }
 
     @Override
-    public Spliterator<Network<Executable, ModelDependency>> spliterator() {
+    public Spliterator<Network<Executable, StageDependency>> spliterator() {
         return null;
     }
 

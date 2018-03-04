@@ -6,18 +6,18 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 
 //TODO: Introduce Iterable at later stage
-//TODO: Change to Map<Long stepRunId, List<ModelData>>
-public interface Executable extends CompletionStage<Map<Long, List<ModelData>>> /*, Iterable<Executable>*/ {
+//TODO: Change to Map<Long stepRunId, List<StageData>>
+public interface Executable extends CompletionStage<Map<Long, List<StageData>>> /*, Iterable<Executable>*/ {
 
 
     //Add to input
-    CompletableFuture<Map<Long, List<ModelData>>> addToInput(Map<Long, List<ModelData>> modelDataMap);
+    CompletableFuture<Map<Long, List<StageData>>> addToInput(Map<Long, List<StageData>> stageDataMap);
 
     //Add to output
-    CompletableFuture<Map<Long, List<ModelData>>> addToOutput(Map<Long, List<ModelData>> modelDataMap);
+    CompletableFuture<Map<Long, List<StageData>>> addToOutput(Map<Long, List<StageData>> stageDataMap);
 
 
-    default CompletableFuture<Map<Long, List<ModelData>>> execute(Map<Long, List<ModelData>> inputData) {
+    default CompletableFuture<Map<Long, List<StageData>>> execute(Map<Long, List<StageData>> inputData) {
         List<Executable> upstreamStages = getUpstreamStages();
         //List<Executable> downstreamStages = getDownstreamStages();
 
@@ -36,19 +36,19 @@ public interface Executable extends CompletionStage<Map<Long, List<ModelData>>> 
                 v -> upstreamHoses.stream()
                         .map(executable -> executable.toCompletableFuture().join())
                         .collect(Collectors.toList()));*/
-        //trigger(null).thenAccept(modelDataMap -> stageResult.complete(output));
+        //trigger(null).thenAccept(stageDataMap -> stageResult.complete(output));
         //downstreamStages.parallelStream().forEach(executable -> executable.addToInput(output));
 
         return this.toCompletableFuture();
     }
 
-    Map<Long, List<ModelData>> getOutput();
+    Map<Long, List<StageData>> getOutput();
 
-    Map<Long, List<ModelData>> getInput();
+    Map<Long, List<StageData>> getInput();
 
-    CompletableFuture<Map<Long, List<ModelData>>> getStageResult();
+    CompletableFuture<Map<Long, List<StageData>>> getStageResult();
 
-    CompletionStage<Map<Long, List<ModelData>>> trigger(Void v);
+    CompletionStage<Map<Long, List<StageData>>> trigger(Void v);
 
     StageStepsDependencyGraph getDependencyGraph();
 
@@ -56,7 +56,7 @@ public interface Executable extends CompletionStage<Map<Long, List<ModelData>>> 
 
     List<Executable> getDownstreamStages();
 
-    default CompletableFuture<Map<Long, List<ModelData>>> toCompletableFuture() {
+    default CompletableFuture<Map<Long, List<StageData>>> toCompletableFuture() {
         return getStageResult();
     }
 
