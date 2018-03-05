@@ -22,24 +22,21 @@ public class StageGroup extends AbstractExecutableStage {
     }*/
 
     @Override
-    public StageStepsDependencyGraph getDependencyGraph() {
-        return null;
-    }
-
-    @Override
-    public List<Executable> getUpstreamStages() {
-        return null;
-    }
-
-    @Override
-    public List<Executable> getDownstreamStages() {
-        return null;
-    }
-
-    @Override
     public CompletionStage<Map<Long, List<StageData>>> trigger(Void v) {
         //TODO:
         return this;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public List<Stage> getStages() {
+        return stages;
     }
 
 

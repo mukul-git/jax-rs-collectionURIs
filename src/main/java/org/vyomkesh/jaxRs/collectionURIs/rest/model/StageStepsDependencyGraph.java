@@ -27,7 +27,7 @@ public class StageStepsDependencyGraph implements Iterable<Network<Executable, S
         //TODO: Check if parallel changes are threadsafe
         memberStages.parallelStream().forEach(stage -> {
             dependencyGraph.nodes().add(stage);
-            stage.getStageSteps().parallelStream().forEach(stageStep -> {
+            stage.getSubStages().parallelStream().forEach(stageStep -> {
                 dependencyGraph.nodes().add(stageStep);
                 dependencyGraph.edges().add(new StageDependency(stage.getId(), stageStep.getId(), Collections.EMPTY_MAP));
                 List<StageDependency> upstreamStageDependencies = stageDependencyDao.getUpstreamDepsFor(stageStep.getId());

@@ -49,4 +49,23 @@ public abstract class AbstractExecutableStage extends CompletableFuture<Map<Long
         return this;
     }*/
 
+    @Override
+    public StageStepsDependencyGraph getDependencyGraph() {
+        //TODO:
+        return null;
+    }
+
+    @Override
+    public List<Executable> getUpstreamStages() {
+        //TODO:
+        return null;
+    }
+
+    @Override
+    public List<Executable> getDownstreamStages() {
+        //TODO:
+        return null;
+    }
+
+
 }

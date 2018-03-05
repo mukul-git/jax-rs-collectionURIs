@@ -7,12 +7,12 @@ import java.util.concurrent.CompletionStage;
 public class Stage extends AbstractExecutableStage {
     String name;
     long id;
-    List<StageStep> stageSteps;
+    List<SubStage> subStages;
 
-    public Stage(String name, long id, List<StageStep> stageSteps) {
+    public Stage(String name, long id, List<SubStage> subStages) {
         this.name = name;
         this.id = id;
-        this.stageSteps = stageSteps;
+        this.subStages = subStages;
     }
 
     public String getName() {
@@ -23,24 +23,8 @@ public class Stage extends AbstractExecutableStage {
         return id;
     }
 
-    public List<StageStep> getStageSteps() {
-        return stageSteps;
-    }
-
-
-    @Override
-    public StageStepsDependencyGraph getDependencyGraph() {
-        return null;
-    }
-
-    @Override
-    public List<Executable> getUpstreamStages() {
-        return null;
-    }
-
-    @Override
-    public List<Executable> getDownstreamStages() {
-        return null;
+    public List<SubStage> getSubStages() {
+        return subStages;
     }
 
     @Override
